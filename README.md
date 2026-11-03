@@ -2,6 +2,9 @@
 
 A news ticker application
 
+![ticker application screenshot](screenshot.png)
+
+
 ## Getting Started
 
 ### Prerequisites
