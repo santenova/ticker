@@ -100,4 +100,36 @@ This command will install the necessary dependencies, including Node.js and npm.
 * `news-api`: Fetches news articles from various sources
 * `stock-api`: Fetches stock data from various sources
 * `rss2json`: Parses RSS feeds from various sources
+
+
+
+### Prompts
+```
+
+  const SYSTEM_PROMPT =
+  'You are the night-desk editor of a markets briefing app. You read the newest headlines about one stock and write a brief a trader can scan in fifteen seconds. Plain declarative prose, no hype, no advice, no price targets.';
+
+  const headlineLines = news
+    .map((item, i) => `${i + 1}. [${item.source}] ${item.title}${item.publishedAt ? ` (${item.publishedAt})` : ''}`)
+    .join('\n');
+
+  return `Stock: ${name || symbol} (${symbol})
+${priceLine}
+Time now: ${new Date().toISOString()}
+
+Newest headlines, newest first:
+${headlineLines}
+
+Write the brief. Return JSON only with this shape:
+{"summary": string, "sentiment": "bullish" | "bearish" | "neutral", "sentimentScore": number, "confidence": "low" | "medium" | "high", "bullets": string[], "keyEvents": [{"type": string, "title": string, "detail": string}]}
+
+Rules:
+- summary: 2 to 4 sentences of plain prose. Say what moved the stock or the story, and what matters next. No recommendations, no price predictions, no hedging filler.
+- sentiment: the tone of this news flow for the next few sessions. sentimentScore: 0 is deeply bearish, 50 is mixed, 100 is deeply bullish.
+- bullets: 2 to 4 factual takeaways, max 18 words each.
+- keyEvents: only material items (earnings, guidance, analyst actions, products, regulatory, M&A, executive changes). type is one of earnings, analyst, product, regulatory, corporate, macro. Skip routine price commentary. Use an empty array if nothing material.
+- Use only the headlines above. Never invent facts, numbers, or headlines.`;
+}
+
+    
 ```
