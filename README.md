@@ -136,7 +136,7 @@ Rules:
     
 ```
 
-### OpenAI-api specification
+### Chat Conversation OpenAI-api style messages array
 
 ```
 
