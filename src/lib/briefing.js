@@ -189,3 +189,4 @@ export async function getBriefing(symbol, settings = {}) {
 
   return { symbol, quote, news, ai, aiError, generatedAt: new Date().toISOString() };
 }
+    
