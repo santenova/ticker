@@ -1,4 +1,4 @@
-// Curated universe of well-known, liquid US-listed symbols.
+o// Curated universe of well-known, liquid US-listed symbols.
 export const STOCKS = [
   { symbol: 'AAPL', name: 'Apple Inc.', sector: 'Technology' },
   { symbol: 'MSFT', name: 'Microsoft Corp.', sector: 'Technology' },
