@@ -138,7 +138,8 @@ Rules:
 
 ### OpenAI-api specification
 
-``
+```
+
 
 [
   {
@@ -178,4 +179,4 @@ Rules:
       }
     ]
   }
-]``
+]```
