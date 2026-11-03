@@ -1,10 +1,11 @@
 // Connection test for the AI backends: verifies the endpoint and lists its models
 // through the OpenAI-compatible /v1/models route (what both backends speak).
 
+import { absoluteEndpoint } from '@/lib/endpointUrl';
+
 function rootUrl(base) {
-  let url = String(base || '').trim().replace(/\/+$/, '');
+  const url = absoluteEndpoint(base);
   if (!url) throw new Error('Enter a base URL first.');
-  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
   if (/\/v\d+$/.test(url) || /\/v\d+\/models$/.test(url)) return url;
   return `${url}/v1`;
 }

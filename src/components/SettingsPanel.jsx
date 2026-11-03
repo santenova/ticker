@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { X, Loader2, ServerCog, Check, TriangleAlert } from 'lucide-react';
-import { saveSettings, DEFAULT_OLLAMA_URL } from '@/lib/profile';
+import { saveSettings, DEFAULT_OLLAMA_URL, TUNNEL_OLLAMA_URL } from '@/lib/profile';
 import { fetchModels } from '@/lib/aiBackends';
 
 const OLLAMA_PRESETS = [
+  { label: 'Internal proxy · /proxy', url: DEFAULT_OLLAMA_URL },
   { label: 'Local machine · localhost:11434', url: 'http://localhost:11434' },
-  { label: 'Saved tunnel · ngrok', url: DEFAULT_OLLAMA_URL },
+  { label: 'Saved tunnel', url: TUNNEL_OLLAMA_URL },
 ];
 
 const EMPTY = {
@@ -200,10 +201,10 @@ export default function SettingsPanel({ open, settings, onClose, onSaved }) {
             </label>
             <Field
               label="Base URL"
-              placeholder="https://christy-ramentaceous-verbatim.ngrok-free.dev"
+              placeholder="/proxy"
               value={form.ollama_url}
               onChange={update('ollama_url')}
-              hint="Reachable from this browser, with this site's origin allowed (set OLLAMA_ORIGINS)."
+              hint="Defaults to the app's own /proxy. Any reachable URL works too, as long as this site's origin is allowed (set OLLAMA_ORIGINS)."
             />
             <ModelPicker
               label="Model"

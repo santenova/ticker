@@ -1,6 +1,7 @@
 // AI briefing written in the browser against the user's own model endpoint.
 
 import { fetchNews, fetchQuote } from '@/lib/market';
+import { absoluteEndpoint } from '@/lib/endpointUrl';
 
 const SYSTEM_PROMPT =
   'You are the night-desk editor of a markets briefing app. You read the newest headlines about one stock and write a brief a trader can scan in fifteen seconds. Plain declarative prose, no hype, no advice, no price targets.';
@@ -34,9 +35,8 @@ Rules:
 }
 
 function chatCompletionsUrl(base) {
-  let url = String(base || '').trim().replace(/\/+$/, '');
+  const url = absoluteEndpoint(base);
   if (!url) throw new Error('endpoint not set');
-  if (!/^https?:\/\//i.test(url)) url = `https://${url}`;
   if (url.endsWith('/chat/completions')) return url;
   if (/\/v\d+$/.test(url)) return `${url}/chat/completions`;
   return `${url}/v1/chat/completions`;
@@ -189,4 +189,3 @@ export async function getBriefing(symbol, settings = {}) {
 
   return { symbol, quote, news, ai, aiError, generatedAt: new Date().toISOString() };
 }
-    
