@@ -39,33 +39,6 @@ This command will install the necessary dependencies, including Node.js and npm.
 * `stock-api`: ^2.0.0 (for fetching stock data)
 * `rss2json`: ^1.1.0 (for parsing RSS feeds)
 
-### Models
-
-To use the application, you need to pull the required models. Here are some examples:
-
-**News Article Model**
-
-To pull the news article model, run the following command:
-```bash
-npm run pull-news-article
-```
-This will pull the latest news article data from the `news-api` and save it to the `models/newsArticle.js` file.
-
-**Stock Model**
-
-To pull the stock model, run the following command:
-```bash
-npm run pull-stock
-```
-This will pull the latest stock data from the `stock-api` and save it to the `models/stock.js` file.
-
-**RSS Feed Model**
-
-To pull the RSS feed model, run the following command:
-```bash
-npm run pull-rss-feed
-```
-This will pull the latest RSS feed data from the `rss2json` and save it to the `models/rssFeed.js` file.
 
 ### Components
 
