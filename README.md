@@ -1,5 +1,11 @@
 # news-ticker
 
+## Video Cast
+
+![Using ticker](video-cast.gif)
+
+
+
 ## News ticker application
 
 ![ticker application screenshot](screenshot.png)
