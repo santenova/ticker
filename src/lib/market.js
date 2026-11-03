@@ -6,6 +6,7 @@ const QUOTE_URL = (symbol) =>
   `https://quote.cnbc.com/quote-html-webservice/restQuote/symbolType/symbol?symbols=${encodeURIComponent(
     symbol.replace(/-/g, '.')
   )}&requestMethod=itv&noform=1&partnerId=2&fund=1&exthrs=1&output=json&events=1`;
+
 const FEED_PROXY = 'https://api.rss2json.com/v1/api.json';
 
 const NEWS_FEEDS = (symbol) => [
@@ -73,33 +74,33 @@ export async function fetchQuote(symbol) {
   const res = await fetch(QUOTE_URL(symbol), { headers: { Accept: 'application/json' } });
   if (!res.ok) throw new Error(`Quote request failed (${res.status})`);
 
-  const raw = (await res.json())?.FormattedQuoteResult?.FormattedQuote?.[0];
-  if (!raw) throw new Error('No live quote for that symbol.');
+  const raw = await res.json();
+  if (!raw.FormattedQuoteResult?.FormattedQuote?.[0]) throw new Error('No live quote for that symbol.');
 
-  const price = num(raw.last);
+  const price = num(raw.FormattedQuoteResult.FormattedQuote[0].last);
   if (!Number.isFinite(price)) throw new Error('No live price for that symbol.');
 
-  const previousClose = num(raw.previous_day_closing);
-  let change = num(raw.change);
+  const previousClose = num(raw.FormattedQuoteResult.FormattedQuote[0].previous_day_closing);
+  let change = num(raw.FormattedQuoteResult.FormattedQuote[0].change);
   if (!Number.isFinite(change)) change = Number.isFinite(previousClose) ? price - previousClose : 0;
-  let changePercent = num(raw.change_pct);
+  let changePercent = num(raw.FormattedQuoteResult.FormattedQuote[0].change_pct);
   if (!Number.isFinite(changePercent)) changePercent = previousClose ? (change / previousClose) * 100 : 0;
 
-  const high = num(raw.high);
-  const low = num(raw.low);
-  const asOf = raw.last_time ? new Date(raw.last_time) : null;
+  const high = num(raw.FormattedQuoteResult.FormattedQuote[0].high);
+  const low = num(raw.FormattedQuoteResult.FormattedQuote[0].low);
+  const asOf = raw.FormattedQuoteResult.FormattedQuote[0].last_time ? new Date(raw.FormattedQuoteResult.FormattedQuote[0].last_time) : null;
 
   return {
     symbol,
-    name: raw.name || getStock(symbol)?.name || symbol,
-    exchange: raw.exchange || '',
-    currency: raw.currencyCode || 'USD',
+    name: raw.FormattedQuoteResult.FormattedQuote[0].name || getStock(symbol)?.name || symbol,
+    exchange: raw.FormattedQuoteResult.FormattedQuote[0].exchange || '',
+    currency: raw.FormattedQuoteResult.FormattedQuote[0].currencyCode || 'USD',
     price: round(price),
-    previousClose: Number.isFinite(previousClose) ? round(previousClose) : null,
+    previousClose: round(previousClose),
     change: round(change),
     changePercent: round(changePercent),
-    dayHigh: Number.isFinite(high) ? round(high) : null,
-    dayLow: Number.isFinite(low) ? round(low) : null,
+    dayHigh: round(high),
+    dayLow: round(low),
     series: [],
     asOf: asOf && !Number.isNaN(asOf.getTime()) ? asOf.toISOString() : new Date().toISOString(),
   };

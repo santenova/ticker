@@ -135,3 +135,47 @@ Rules:
 
     
 ```
+
+### OpenAI-api specification
+
+``
+
+[
+  {
+    "id": "chatcmpl-521",
+    "object": "chat.completion",
+    "created": 1793705800,
+    "model": "llama3.1",
+    "system_fingerprint": "fp_ollama",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"summary\": \"Tesla's stock price rose 1% today, driven by news of its expanding robotaxi service and increased vehicle registrations. Analysts have raised their fair value estimates for Tesla and SpaceX, but warn that the company needs better marketing to maintain its market share. The potential for a SpaceX-Tesla merger remains a key topic of discussion.\",\n  \"sentiment\": \"bullish\",\n  \"sentimentScore\": 80,\n  \"confidence\": \"high\",\n  \"bullets\": [\n    \"Tesla's robotaxi service now available in a new city.\",\n    \"Vehicle registrations jump 248%.\",\n    \"Analysts raise fair value estimates for Tesla and SpaceX.\"\n  ],\n  \"keyEvents\": [\n    {\n      \"type\": \"product\",\n      \"title\": \"Tesla Robotaxi Expansion\",\n      \"detail\": \"Tesla's robotaxi service now available in a new city.\"\n    },\n    {\n      \"type\": \"analyst\",\n      \"title\": \"Analyst Estimates Raised\",\n      \"detail\": \"Analysts raise fair value estimates for Tesla and SpaceX.\"\n    },\n    {\n      \"type\": \"corporate\",\n      \"title\": \"Potential SpaceX-Tesla Merger\",\n      \"detail\": \"Analysts discuss potential market reaction to a SpaceX-Tesla merger.\"\n    }\n  ]\n}"
+        },
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 798,
+      "completion_tokens": 276,
+      "total_tokens": 1074
+    }
+  },
+  {
+    "model": "llama3.1",
+    "temperature": 0.2,
+    "stream": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are the night-desk editor of a markets briefing app. You read the newest headlines about one stock and write a brief a trader can scan in fifteen seconds. Plain declarative prose, no hype, no advice, no price targets."
+      },
+      {
+        "role": "user",
+        "content": "Stock: Tesla Inc (TSLA)\nLast price $403.82 (+1% today, previous close 403.82)\nTime now: 2026-11-03T11:36:34.121Z\n\nNewest headlines, newest first:\n1. [The Globe and Mail] 1 S&amp;P 500 stock to target this week and 2 we turn down (2026-11-03T10:07:30.000Z)\n2. [Yahoo Finance] TSLA Stock Slips Overnight: Trump Vows To Shield Musk — But Influencer Flags ‘Tougher Than Ever’ SpaceX Merger Vote (2026-11-03T08:15:08.000Z)\n3. [Investor's Business Daily] Tesla Robotaxi Adds This New City, Stock Continues Rally (2026-11-02T21:00:00.000Z)\n4. [FinanceFeeds] TSLA Stock Rises as Tesla Registrations Jump 248% (2026-11-02T19:28:25.000Z)\n5. [Benzinga] Tesla Stock Moves Higher: What's Going On? - Tesla (NASDAQ:TSLA) (2026-11-02T19:11:56.000Z)\n6. [TipRanks] Fans Release Tesla Roadster-Themed Browser Game, Tesla Stock (NASDAQ:TSLA) Gains (2026-11-02T17:35:38.000Z)\n7. [Investing.com] Analyst models potential market reaction to a SpaceX-Tesla all-stock merger (2026-11-02T15:45:05.000Z)\n8. [Morningstar] We Raised Our Fair Value Estimates for Tesla and SpaceX. Are They Buys? (2026-11-02T10:06:45.000Z)\n9. [Yahoo Finance] Gary Black Says Tesla Is Losing EV Share to ‘No-Name’ Rivals Despite ‘Huge First-Mover Advantage’—Warns TSLA Needs Better Marketing (2026-11-02T05:35:00.000Z)\n10. [Yahoo Finance] Cybercab Expansion Might Change The Case For Investing In Tesla Stock (TSLA) (2026-11-01T05:16:00.000Z)\n\nWrite the brief. Return JSON only with this shape:\n{\"summary\": string, \"sentiment\": \"bullish\" | \"bearish\" | \"neutral\", \"sentimentScore\": number, \"confidence\": \"low\" | \"medium\" | \"high\", \"bullets\": string[], \"keyEvents\": [{\"type\": string, \"title\": string, \"detail\": string}]}\n\nRules:\n- summary: 2 to 4 sentences of plain prose. Say what moved the stock or the story, and what matters next. No recommendations, no price predictions, no hedging filler.\n- sentiment: the tone of this news flow for the next few sessions. sentimentScore: 0 is deeply bearish, 50 is mixed, 100 is deeply bullish.\n- bullets: 2 to 4 factual takeaways, max 18 words each.\n- keyEvents: only material items (earnings, guidance, analyst actions, products, regulatory, M&A, executive changes). type is one of earnings, analyst, product, regulatory, corporate, macro. Skip routine price commentary. Use an empty array if nothing material.\n- Use only the headlines above. Never invent facts, numbers, or headlines."
+      }
+    ]
+  }
+]``
