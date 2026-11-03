@@ -111,9 +111,6 @@ This command will install the necessary dependencies, including Node.js and npm.
 * `stock-api`: Fetches stock data from various sources
 * `rss2json`: Parses RSS feeds from various sources
 
-### Default Ollama Endpoint
-
-* use /proxy as default ollama endpoint
 
 ### Prompts
 
@@ -217,4 +214,10 @@ Time:        2.379 s
 Ran all test suites in 2 projects.
 
 
+```
+
+
+### Default Ollama Endpoint
+```
+* use /proxy as default ollama endpoint
 ```
