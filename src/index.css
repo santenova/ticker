@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 16% 97%;
+    --foreground: 210 8% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 8% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 8% 8%;
+    --primary: 210 8% 8%;
+    --primary-foreground: 40 16% 97%;
+    --secondary: 40 12% 94%;
+    --secondary-foreground: 210 8% 12%;
+    --muted: 40 12% 94%;
+    --muted-foreground: 210 5% 42%;
+    --accent: 40 12% 94%;
+    --accent-foreground: 210 8% 12%;
+    --destructive: 5 62% 45%;
+    --destructive-foreground: 40 16% 97%;
+    --border: 40 9% 89%;
+    --input: 40 9% 89%;
+    --ring: 210 8% 22%;
+    --up: 158 55% 28%;
+    --down: 5 66% 45%;
+    --chart-1: 158 55% 28%;
+    --chart-2: 5 66% 45%;
+    --chart-3: 210 8% 30%;
+    --chart-4: 40 40% 55%;
+    --chart-5: 210 12% 60%;
+    --radius: 0.75rem;
+    --font-heading: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sidebar-background: 40 16% 97%;
+    --sidebar-foreground: 210 8% 20%;
+    --sidebar-primary: 210 8% 8%;
+    --sidebar-primary-foreground: 40 16% 97%;
+    --sidebar-accent: 40 12% 94%;
+    --sidebar-accent-foreground: 210 8% 12%;
+    --sidebar-border: 40 9% 89%;
+    --sidebar-ring: 210 8% 22%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    font-feature-settings: "cv11" 1, "ss01" 1;
+  }
+
+  ::selection {
+    background: hsl(var(--foreground) / 0.1);
+  }
+}
+
+@keyframes tp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.tp-enter {
+  animation: tp-fade-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
