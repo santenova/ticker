@@ -112,7 +112,9 @@ You are the night-desk editor of a markets briefing app. You read the newest hea
 ```
 #### summarize prompt
 
-```Stock: ${name || symbol} (${symbol})
+```
+
+`Stock: ${name || symbol} (${symbol})
 ${priceLine}
 Time now: ${new Date().toISOString()}
 
