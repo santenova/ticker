@@ -190,7 +190,7 @@ Rules:
 
 
 
-### TEST
+### npm test
 
 
 ```
