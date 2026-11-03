@@ -127,7 +127,7 @@ Rules:
 - sentiment: the tone of this news flow for the next few sessions. sentimentScore: 0 is deeply bearish, 50 is mixed, 100 is deeply bullish.
 - bullets: 2 to 4 factual takeaways, max 18 words each.
 - keyEvents: only material items (earnings, guidance, analyst actions, products, regulatory, M&A, executive changes). type is one of earnings, analyst, product, regulatory, corporate, macro. Skip routine price commentary. Use an empty array if nothing material.
-- Use only the headlines above. Never invent facts, numbers, or headlines.```;
+- Use only the headlines above. Never invent facts, numbers, or headlines.`;
 
 
     
