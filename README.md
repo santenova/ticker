@@ -19,7 +19,9 @@ This command will install the necessary dependencies, including Node.js and npm.
 
 1. Clone the repository: `git clone git@github.com:santenova/ticker.git`
 2. Install dependencies: `npm install`
-3. Start the application: `npm run dev`
+3. Build the application: `npm run build`
+4. Test the application: `npm test`
+4. Start the application: `npm run dev`
 
 ### Scripts
 
@@ -182,3 +184,25 @@ Rules:
 ]```
 
 
+
+### TEST
+
+
+```
+> news-ticker@0.0.0 test
+> node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand
+
+(node:1159496) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+ PASS   logic  tests/aiBackends.test.js
+ PASS   ui  tests/jsx.test.jsx
+ PASS   logic  tests/briefingPrompt.test.js
+
+Test Suites: 1 skipped, 3 passed, 3 of 4 total
+Tests:       2 skipped, 11 passed, 13 total
+Snapshots:   0 total
+Time:        2.379 s
+Ran all test suites in 2 projects.
+
+
+```
