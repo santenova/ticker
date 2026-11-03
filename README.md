@@ -1,8 +1,13 @@
 # news-ticker
 
-A news ticker application
+## News ticker application
 
 ![ticker application screenshot](screenshot.png)
+
+
+## News ticker config
+
+![ticker config screenshot](screenshot-config.png)
 
 
 ## Getting Started
